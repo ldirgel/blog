@@ -60,8 +60,8 @@ SparkStreaming以窗口为最小单位形成RDD，然后在Spark进行处理。
   + 需要设置正确的窗口大小和步长
   + 容错
     + Driver：启动时使用getOrCreate
-    + Executor：和Sparke的容错机制一致
-    + Receiver：取决于数据源是否提供临时的数据储存(Spark对Flume的拉式接收器提供)
+    + Executor：和Spark的容错机制一致
+    + Receiver：Spark对Flume的拉式接收器提供临时的数据储存
 
     ####合理的窗口大小
     先从大一点的开始，逐步缩小
