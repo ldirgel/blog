@@ -37,13 +37,45 @@ accumulator和broadcast：
 + yarn-client模式属于交互，driver在本机，等待运算结果返回
 + spark-submit指令可以通过 --conf指定额外参数(**但代码中设置的conf参数优先级更高**) --jar指定额外依赖包 
 
-###一些常用的参数
-+ spark.speculation = true
-+ spark.executor.cores = 2
-+ spark.executor.num = 10
+    ####一些常用的参数
+    + spark.speculation = true
+    + spark.executor.cores = 2
+    + spark.executor.num = 10
 
-###内存模型
-Spark On Yarn的内存模型 __待补充__
+    ####内存模型
+    Spark On Yarn的内存模型 __待补充__
+
+    ####并行度控制
+    repartitoin、coalese
+    如何判断？如果任务瞬间完成，说明并行度过高
+
+###Spark SQL
+DataFrame可以用来很方便的进行相关处理，常见函数包括aggs、count、max等
+
+###Spark Streaming
+SparkStreaming以窗口为最小单位形成RDD，然后在Spark进行处理。
+
+  + 支持Kafka、Flume等多种数据源
+  + 需要设置正确的窗口大小和步长
+  + 容错
+    + Driver：启动时使用getOrCreate
+    + Executor：和Sparke的容错机制一致
+    + Receiver：取决于数据源是否提供临时的数据储存(Spark对Flume的拉式接收器提供)
+
+    ####合理的窗口大小
+    先从大一点的开始，逐步缩小
+    
+    ####增加并行度
+    + 使用多个Receiver并将输入union
+    + 对输入repartition
+    
+    ####GC
+    对于SparkStreaming来讲，实时性要求较高，不大能接受任务的终端或者暂停，最好使用CMS的GC方式
+    
+###Spark Mlib
+提供了多种机器学习函数：TF-IDF、W2V、Scaling、Normalization、SVM、LR、决策树、随机森林、KMeans、PCA、协同过滤等。
+
+
 
 
 
