@@ -33,6 +33,7 @@ accumulator和broadcast：
 + 后者只广播一次，会在所有executor上存一份，这个值的更改对其他executor不可见
 
 ###Spark On Yarn
+
 + yarn-cluster模式属于托管，把任务提交上去，指定输出路径即可
 + yarn-client模式属于交互，driver在本机，等待运算结果返回
 + spark-submit指令可以通过 --conf指定额外参数(**但代码中设置的conf参数优先级更高**) --jar指定额外依赖包 
@@ -41,10 +42,10 @@ accumulator和broadcast：
     + spark.speculation = true
     + spark.executor.cores = 2
     + spark.executor.num = 10
-
+    
     ####内存模型
     Spark On Yarn的内存模型 __待补充__
-
+    
     ####并行度控制
     repartitoin、coalese
     如何判断？如果任务瞬间完成，说明并行度过高
