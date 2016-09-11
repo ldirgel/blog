@@ -6,7 +6,7 @@
 
 这是来自Spark官网(<http://spark.apache.org/>)的模块图，总体分为Spark Core、Spark Streaming、Spark SQL、MLib、GraphX几大模块。
 
-_需要注意的就是写代码的时候得分别import才行，因为他们分属源码中不同的包_
+_需要注意的就是写代码的时候得分别**import**才行，因为他们分属源码中不同的包_
 
 ###部署图
 
@@ -19,13 +19,31 @@ _需要注意的就是写代码的时候得分别import才行，因为他们分�
 我是使用sbt的，配置好build.sbt之后(主要是依赖包的配置)，使用sbt package打包，如果要用fat-jar的方式，还需要配置一下sbt-assmeble插件， 并且在build.sbt中配置冲依赖冲突的解决方式。
 
 ###RDD常用操作
-基本就是map、flatmap、filter、distinct、sample、union、top、agg、froeache等
+基本就是map、mappartition、flatmap、filter、distinct、sample、union、top、agg、froeache等
 
 ###Cache Persist or CheckPoint？
 这几个都是为了减少数据的重复计算，__待补充__
 
 ###数据源
 Spark支持多种数据源：包括HDFS、Hive、ES、MySQL、PgSQL、Cassandra、HBase等
+
+###共享变量
+accumulator和broadcast：
++ 前者在driver创建，由executor累加，且只有driver可以读取这个值
++ 后者只广播一次，会在所有executor上存一份，这个值的更改对其他executor不可见
+
+###Spark On Yarn
++ yarn-cluster模式属于托管，把任务提交上去，指定输出路径即可
++ yarn-client模式属于交互，driver在本机，等待运算结果返回
++ spark-submit指令可以通过 --conf指定额外参数(**但代码中设置的conf参数优先级更高**) --jar指定额外依赖包 
+
+###一些常用的参数
++ spark.speculation = true
++ spark.executor.cores = 2
++ spark.executor.num = 10
+
+###内存模型
+Spark On Yarn的内存模型 __待补充__
 
 
 
