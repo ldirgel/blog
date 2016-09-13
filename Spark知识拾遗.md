@@ -2,7 +2,7 @@
 
 ###模块图
 
-![Spark模块图](https://github.com/ldirgel/blog/tree/master/Figures/spark-stack.png)
+![Spark模块图](https://github.com/ldirgel/blog/blob/master/Figures/spark-stack.png)
 
 这是来自Spark官网(<http://spark.apache.org/>)的模块图，总体分为Spark Core、Spark Streaming、Spark SQL、MLib、GraphX几大模块。
 
@@ -10,7 +10,7 @@ _需要注意的就是写代码的时候得分别**import**才行，因为他们
 
 ###部署图
 
-![Spark部署图](https://github.com/ldirgel/blog/tree/master/Figures/spark-deploy.png)
+![Spark部署图](https://github.com/ldirgel/blog/blob/master/Figures/spark-deploy.png)
 
 来自大牛JerryLead的绘图(<https://github.com/JerryLead/SparkInternals/blob/master/markdown/1-Overview.md>)， 很清晰地看到Master、Worker、Executor、Task的关系
 
@@ -45,7 +45,7 @@ accumulator和broadcast：
     
     ####内存模型
     Spark On Yarn的内存模型 
-	![Spark-On-Yarn Memory](https://github.com/ldirgel/blog/tree/master/Figures/Spark-On-Yarn.png)
+	![Spark-On-Yarn Memory](https://github.com/ldirgel/blog/blob/master/Figures/Spark-On-Yarn.png)
 	+ AM的Container内存由 spark.yarn.am.memory + spark.yarn.am.memoryOverhead 确定
 	+ Executor的cache-storage由 (executor.memory + executor.memoryOverhead) 和 spark.storage.memoryFraction 共同确定
 	+ Executor的shuffle-storage由 (executor.memory + executor.memoryOverhead) 和 spark.shuffle.memoryFraction 共同确定
