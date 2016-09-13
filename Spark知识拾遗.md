@@ -21,8 +21,29 @@ _需要注意的就是写代码的时候得分别**import**才行，因为他们
 ###RDD常用操作
 基本就是map、mappartition、flatmap、filter、distinct、sample、union、top、agg、foreach等
 
-###Cache Persist or CheckPoint？
-这几个都是为了减少数据的重复计算，__待补充__
+###Cache, Persist or CheckPoint?
+这几个都是为了减少数据的重复计算
+
+####Cache/Persist
+  + Cache = Persist(MEMORY_ONLY)
+  + 只能cache在代码中显式看得到的RDD
+  + Cache使用memory，Persist可以指定disk还是memory
+  + 会先判断一下是否被CheckPoint了，如果是就直接读，然后判断是不是能存下，存不下就根据FIFO原则先drop**其他RDD**之前被cache的partition
+  + 用的时候先去driver查一下，cache了没有，cache在哪，然后从本机或者其他机器拿数据
+ 
+####CheckPoint
+  + Job结束后单独启动专门的Job去完成的，所以这个RDD会被计算两次，最好是先把他cache下来，这样第二次就不用重新计算了
+  + 使用硬盘
+  + CheckPoint之后会清除这个RDD的Dependency，并把他的父RDD设为CPRDD
+  + RDDCheckpointData 管理所有被cp的RDD，用的时候去查一下，然后从HDFS读就行了
+  
+####区别
+  1. Lineage
+    + Cache会记住之前的computing chain
+    + CheckPoint直接落地HDFS，消除了lineage
+  2. 生命周期
+    + Persist的RDD由blockManager管理，一旦driver运行结束，就没了（blockManager的local文件被删除）
+    + CheckPoint的RDD一直存在，下一个driver也能用
 
 ###数据源
 Spark支持多种数据源：包括HDFS、Hive、ES、MySQL、PgSQL、Cassandra、HBase等
