@@ -19,7 +19,7 @@ _需要注意的就是写代码的时候得分别**import**才行，因为他们
 我是使用sbt的，配置好build.sbt之后(主要是依赖包的配置)，使用sbt package打包，如果要用fat-jar的方式，还需要配置一下sbt-assmeble插件， 并且在build.sbt中配置冲依赖冲突的解决方式。
 
 ###RDD常用操作
-基本就是map、mappartition、flatmap、filter、distinct、sample、union、top、agg、froeache等
+基本就是map、mappartition、flatmap、filter、distinct、sample、union、top、agg、foreach等
 
 ###Cache Persist or CheckPoint？
 这几个都是为了减少数据的重复计算，__待补充__
@@ -45,6 +45,7 @@ accumulator和broadcast：
     
     ####内存模型
     Spark On Yarn的内存模型 
+    
 	![Spark-On-Yarn Memory](https://github.com/ldirgel/blog/blob/master/Figures/Spark-On-Yarn.png)
 	+ AM的Container内存由 spark.yarn.am.memory + spark.yarn.am.memoryOverhead 确定
 	+ Executor的cache-storage由 (executor.memory + executor.memoryOverhead) 和 spark.storage.memoryFraction 共同确定
