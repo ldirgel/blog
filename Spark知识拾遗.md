@@ -99,7 +99,7 @@ SparkStreaming以窗口为最小单位形成RDD，然后在Spark进行处理。
     + 对输入repartition
     
     ####GC
-    对于SparkStreaming来讲，实时性要求较高，不大能接受任务的终端或者暂停，最好使用CMS的GC方式
+    对于SparkStreaming来讲，实时性要求较高，不大能接受任务的中断或者暂停，最好使用CMS的GC方式
     
 ###Spark Mlib
 提供了多种机器学习函数：TF-IDF、W2V、Scaling、Normalization、SVM、LR、决策树、随机森林、KMeans、PCA、协同过滤等。
