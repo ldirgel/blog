@@ -20,7 +20,16 @@ Metastore其实分为两个部分
 + Remote模式：Server与Hive Server独立
 
 ###Data
-元数据的目的还是管理数据
+元数据的目的还是管理数据，Hive提供托管表和外部表两种方式来管理数据
++ 托管表：Hive会把数据移动到自己的warehouse目录，drop table时删除数据和元数据
++ 外部表：Hive不移动数据，drop table时也只删除元数据
+
+###数据储存
+Hive所管理的表可以指定底层的存储方式为面向行的SequenceFile或者面向列的RC、ORC、Parquet等
++ 面向行的储存对于整行读取和随机查询效率比较高
++ 面向列的方式适用于列数很多但是查询只查某些列的情况，而且由于同一列的类型一致，可以大大提高压缩比
+	+ Parquet最开始就设计成支持PB，Thrift嵌套列查询，不支持update也不支持传统数据库的ACID
+	+ ORC源于RC，支持update，支持事务，但是想写PB之类的嵌套列查询很麻烦
 
 ###Hive SQL
 Hive SQL虽然与SQL有区别，但是基本上是差不多的。基本的Select，join，groupby等都支持的，但是不支持子查询。
