@@ -10,6 +10,7 @@ Hive是位于用户和HDFS上的分布式数据中间的重要一层
 负责储存Hive所管理的数据的元数据
 
 _什么是元(meta)数据？就是一些表模式(schema)，表位置之类的_
+
 Metastore其实分为两个部分
 + MetaStore Server
 + MetaStore DB
