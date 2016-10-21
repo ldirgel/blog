@@ -9,12 +9,12 @@ Hive是位于用户和HDFS上的分布式数据中间的重要一层
 ###Metastore
 负责储存Hive所管理的数据的元数据
 
-	*什么是元(meta)数据？就是一些表模式(schema)，表位置之类的*
+_什么是元(meta)数据？就是一些表模式(schema)，表位置之类的_
 Metastore其实分为两个部分
 + MetaStore Server
 + MetaStore DB
 
-下面是三种配置图
+MetaStore Server的三种配置模式
 + Embedded模式：Server和DB在Hive Service进程内 -> 不支持多用户连接
 + Local模式：Server在Hive Server内，DB是独立的进程
 + Remote模式：Server与Hive Server独立
@@ -47,6 +47,7 @@ HiveSQL中值得一说的是窗口函数，比如分组内的排序、部分汇�
 HiveSQL涉及的数据倾斜主要分为2块
 + Group by时的数据倾斜
 	+ 加大reduce个数
+		+ set mapred.reduce.tasks = 800 或者 hive.exec.reducers.bytes.per.reducer 自动计算reduce的个数
 	+ 设定groupby.skewindata = true（通过两次MR来解决数据倾斜）
 	+ hive.map.aggr 决定是不是在map先combine一次，可以有两个参数来判断要不要先combine
 		+ hive.groupby.mapaggr.checkinterval = 100000，hive.map.aggr.hash.min.reduction = 0.5
